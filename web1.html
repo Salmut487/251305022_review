@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web 1 - Studi Hadits Digital</title>
+    <style>
+        /* --- 1. RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- 2. NAVBAR STYLING (TEMA BIRU GOLD) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0a1f3d;
+            padding: 15px 5%;
+            color: white;
+            box-shadow: 0 4px 15px rgba(10, 31, 61, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #d4af37;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            background-color: rgba(212, 175, 55, 0.15);
+        }
+
+        /* Dropdown Tema Biru Gold */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #112d52;
+            min-width: 260px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-radius: 5px;
+            flex-direction: column;
+            padding: 10px 0;
+            border: 1px solid #d4af37;
+        }
+
+        .dropdown-content a {
+            padding: 12px 20px;
+            display: block;
+            font-size: 14px;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #183b6b;
+            color: #ffd700;
+            padding-left: 25px;
+        }
+
+        .show-dropdown {
+            display: flex !important;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #d4af37;
+            transition: 0.3s;
+        }
+
+        /* --- 3. HEADER & LAYOUT --- */
+        header {
+            background: linear-gradient(rgba(10, 31, 61, 0.88), rgba(10, 31, 61, 0.88)), 
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 35vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+            border-bottom: 4px solid #d4af37;
+        }
+
+        header h1 { font-size: 32px; margin-bottom: 10px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 18px; color: #d4af37; }
+
+        /* Penyesuaian margin top karena tidak ada profile card di halaman ini */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto 60px; 
+            padding: 0 20px;
+        }
+
+        /* --- 5. REVIEW SECTION STYLING --- */
+        .review-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 40px;
+            margin-bottom: 40px;
+            border-top: 5px solid #0a1f3d;
+        }
+
+        .review-header {
+            border-bottom: 2px solid #eaf0f7;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .review-header h2 { color: #0a1f3d; font-size: 26px; margin-bottom: 10px; text-transform: uppercase; }
+
+        .info-badge {
+            display: inline-block;
+            background: #eaf0f7;
+            color: #0a1f3d;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .review-content h3 {
+            color: #b8860b;
+            font-size: 19px;
+            margin: 25px 0 12px;
+            border-left: 4px solid #0a1f3d;
+            padding-left: 10px;
+        }
+
+        .review-content p { color: #555; margin-bottom: 15px; font-size: 15px; }
+
+        .review-img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px auto 30px;
+            display: block;
+            border: 1px solid #eaeaea;
+        }
+
+        .review-list { list-style-type: decimal; padding-left: 20px; color: #555; margin-bottom: 15px; font-size: 14px; }
+        .review-list li { margin-bottom: 8px; }
+
+        .sub-list { list-style-type: upper-alpha; padding-left: 25px; margin-top: 8px; margin-bottom: 15px; color: #555;}
+        .sub-list li { margin-bottom: 8px; }
+
+        .pros-cons { display: flex; gap: 20px; margin-top: 30px; }
+        .pros, .cons { flex: 1; background: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #dbe2ea; }
+        .pros h4, .cons h4 { margin-bottom: 10px; }
+        .pros h4 { color: #27ae60; }
+        .cons h4 { color: #c0392b; }
+        
+        .full-conclusion {
+            background: #eaf0f7; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #d4af37;
+        }
+        .full-conclusion h4 { color: #0a1f3d; margin-bottom: 10px; }
+
+        .disclaimer { font-style: italic; color: #888; font-size: 13px; margin-bottom: 20px; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .navbar .logo { font-size: 16px; } 
+            .burger { display: block; }
+            .nav-links {
+                position: absolute; top: 60px; right: 0; width: 100%;
+                background: #0a1f3d; flex-direction: column;
+                transform: translateY(-150%); opacity: 0; transition: 0.4s ease;
+                padding: 20px 0; border-bottom: 3px solid #d4af37;
+            }
+            .nav-links.active { transform: translateY(0); opacity: 1; }
+            .nav-links li { margin: 5px 0; width: 100%; text-align: center; }
+            .dropdown-content { position: static; background: #112d52; width: 100%; border: none; box-shadow: none; }
+            .pros-cons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Salman Mutawakkil</a>
+        <div class="burger" id="burger-menu">&#9776;</div>
+        <ul class="nav-links" id="nav-menu">
+            <li>
+                <a href="#" id="drop-trigger">Review Website &#9662;</a>
+                <ul class="dropdown-content" id="drop-menu">
+                    <li><a href="web1.html">Review Website 1 (Hadits.id)</a></li>
+                    <li><a href="web2.html">Review Website 2 (Marja' Basuki)</a></li>
+                    <li><a href="web3.html">Review Website 3 (Hadits Tazkia)</a></li>
+                </ul>
+            </li>
+            <li><a href="ebook.html">Review E-Book</a></li>
+            <li><a href="index.html">Kontak / Profil</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Review Website 1</h1>
+        <p>Platform Hadits.id</p>
+    </header>
+
+    <div class="container">
+        <section class="review-section">
+            <div class="review-header">
+                <h2>Review Website 1: Hadits.id</h2>
+                <div class="disclaimer">(Maaf pak, gambarnya buram, karena laptop kualitas lama)</div>
+                <div>
+                    <span class="info-badge">URL: https://www.hadits.id/</span>
+                    <span class="info-badge">Bahasa: Indonesia</span>
+                    <span class="info-badge">Dosen: Muhammad Alif S,Ag.</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p><strong>Fungsi Website:</strong> Pencarian kutipan hadits dengan riwayat dan pembahasan tertentu.</p>
+                
+                <img src="https://www.image2url.com/r2/default/images/1776480523937-060469c6-2279-42c9-b8f6-2c5cd7f66e47.jpg" alt="Review Antarmuka Awal" class="review-img">
+                
+                <h3>1. Tampilan Awal & Navigasi Utama</h3>
+                <p>Pada bagian awal website, user langsung disuguhkan kolom pencarian yang mencakup; pembahasan hadits, terjemah hadits, dan perawi hadits. Lafazh <em>Al-Hadits</em> pada bagian atas kolom pencarian memberi kesan keilmuan yang kental. Simbol “Cari Hadits” pada bagian bawah kolom pencarian adalah sama seperti fungsi tombol “Search” pada kanal Google, yakni untuk langsung melakukan pencarian pada apa yang user tulis. Dan simbol “Hadits Acak” berfungsi sebagai pencarian secara acak jika user menghendaki.</p>
+                
+                <img src="https://www.image2url.com/r2/default/images/1776480697664-0c9a7c77-0016-42c8-b89b-792a74fc03dc.jpg" alt="Fitur Cari dan Hadits Acak" class="review-img">
+                
+                <p>Pada bagian bawah dari simbol “Cari Hadits” dan “Hadits Acak” terdapat beberapa klasifkasi dari pencarian: perawi hadits tertentu dan sub bab tertentu. Jika user mengkliknya, maka akan langsung disungguhkan apa yang user inginkan. Ini memudahkan user untuk menghilangkan kebingungan.</p>
+                
+                <img src="https://www.image2url.com/r2/default/images/1776480766235-1ef80bea-5a38-4966-a3e6-ac4c00670a08.jpg" alt="Klasifikasi Pencarian" class="review-img">
+                
+                <h3>2. Analisis Fitur Pencarian (Studi Kasus: "KURMA")</h3>
+                <p>Ketika user telah mencari kata “KURMA” pada fitur pencarian yang telah dibahas sebelumnya diatas, user akan langsung disuguhkan hasil pencarian yakni berupa;</p>
+                <ol class="sub-list">
+                    <li>Klasifikasi riwayat kitab tertentu (ditandai dengan “GARIS MERAH” pada gambar).</li>
+                    <li>Klasifikasi sub bab tertentu (ditandai dengan “GARIS BIRU” pada gambar).</li>
+                </ol>
+                <p>Pada bagian atas tulisan “Musnad Utsman bin Affan” yang bergaris “BIRU” dan bagian bawah tulisan “Shahih Al-Bukhari” yang bergaris “MERAH” terdapat jumlah hadits yang mencakup hasil pencarian; “KURMA”, disana tertulis “Sekitar lebih dari 1000 hadits”.<br>
+                Pada bagian bawah judul sub bab (tulisan hijau), terdapat lafazh terjemahan langsung pada hadits yang user ingin cari.</p>
+                
+                <img src="https://www.image2url.com/r2/default/images/1776481764033-6d1799a2-825e-4621-9bf8-21de15e9ac12.jpg" alt="Hasil Pencarian Terjemahan" class="review-img">
+                
+                <p>Nah, jika user scrolling kebawah hingga ujung, maka user akan menemukan navigasi berupa angka-angka yakni slide-slide yang bisa user klik untuk diarahkan pada slide berikutnya. Karena saking banyaknya hasil tentang “KURMA” maka slide yang tersedia adalah 100.</p>
+                
+                <img src="https://www.image2url.com/r2/default/images/1776481903676-954fd1f5-ff4c-44cc-a56b-319d90fe2fd9.jpg" alt="Navigasi Halaman Slide" class="review-img">
+                
+                <h3>3. Detail Konten & Fitur Interaktif</h3>
+                <p>Ketika user meng-klik sub bab tertentu, maka user akan diarahkan pada lafazh hadits langsung baik terjemah dan arabnya. Jika kita melihat langsung pada gambar diatas terdapat 4 pembahasan penting;</p>
+                <ul class="sub-list">
+                    <li>Pada bagian yang “BERGARIS BIRU” terdapat dipaling atas gambar, adalah fitur pindah kitab hadits. Di sana tertulis kitab “Musnad Ahmad”.</li>
+                    <li>Pada bagian yang “BERGARIS COKLAT” terdapat fitur “FOLLOW”, berfungsi untuk mengarahkan user ke akun instagram; “haditsindonesia”, yang memiliki afiliasi langsung dengan web.</li>
+                    <li>Pada bagian yang “BERGARIS KUNING” terdapat fitur bagikan, yang akan langsung mengarahkan user ke “e-mail” untuk dibagikan.</li>
+                    <li>Pada bagian yang “BERGARIS MERAH” terdapat navigasi untuk mengarahkan user kepada hadits berikutnya.</li>
+                </ul>
+                
+                <img src="https://www.image2url.com/r2/default/images/1776481947404-2bd94169-d590-46ca-8bae-ee5f2c99f1df.jpg" alt="Navigasi Hadits Berikutnya" class="review-img">
+                
+                <p>Jika user melakukan scrolling kebawah, maka akan ditemukan:</p>
+                <ol class="review-list">
+                    <li>Fitur “salin kutipan” yang telah digaris merahi pada gambar.</li>
+                    <li>Barkode untuk para relawan yang ingin berdonasi.</li>
+                </ol>
+                <div class="pros-cons">
+                    <div class="cons">
+                        <h4>Kekurangan</h4>
+                        <ul class="review-list" style="list-style-type: disc;">
+                            <li>Tidak ada fitur “menu” pada tampak awal.</li>
+                            <li>Untuk seukuran website pencarian hadits, terasa sangat sederhana dan sepi daripada fitur-fitur dan navigasi-navigasi.</li>
+                        </ul>
+                    </div>
+                    <div class="pros">
+                        <h4>Kesimpulan</h4>
+                        <p class="bio-text">Website ini menyajikan pencarian hadits secara cepat, bagus untuk para pelajar atau mahasiswa yang ingin mencari hadits pembahasan tertentu secara cepat dan gesit. Tampilannya yang sederhana membuat user nyaman berlama-lama padanya. Dan yang paling berharga pada website ini adalah fitur salin kutipan hadits, ini sangat terpakai bagi mahasiswa yang ingin mempelajari hadits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const burger = document.getElementById('burger-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const dropTrigger = document.getElementById('drop-trigger');
+        const dropMenu = document.getElementById('drop-menu');
+
+        // Toggle Burger Menu
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            burger.innerHTML = navMenu.classList.contains('active') ? '&#10005;' : '&#9776;';
+        });
+
+        // Toggle Dropdown
+        dropTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropMenu.classList.toggle('show-dropdown');
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', (e) => {
+            if (!dropTrigger.contains(e.target) && !dropMenu.contains(e.target)) {
+                dropMenu.classList.remove('show-dropdown');
+            }
+        });
+    </script>
+</body>
+</html>
