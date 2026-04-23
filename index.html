@@ -3,106 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review Hadits Digital - Salman Mutawakkil</title>
+    <title>Review Salman Mutawakkil</title>
     <style>
-        /* --- RESET & GOOGLE FONTS --- */
+        /* --- 1. RESET & FONTS --- */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
+        body { background-color: #f8fafc; color: #1e293b; overflow-x: hidden; min-height: 100vh; }
 
-        /* --- NAVBAR --- */
+        /* --- 2. NAVBAR --- */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 31, 61, 0.95); backdrop-filter: blur(10px);
-            padding: 18px 8%; color: white;
+            background: #0a1f3d; padding: 18px 8%; color: white;
             position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #d4af37;
         }
         .navbar .logo { font-size: 14px; font-weight: 800; color: #d4af37; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
         .burger { cursor: pointer; font-size: 24px; color: #d4af37; transition: 0.3s; }
-        .burger:hover { transform: scale(1.1); }
 
-        /* --- SIDEBAR ESTETIK (THE MASTERPIECE) --- */
+        /* --- 3. SIDEBAR ESTETIK --- */
         .nav-sidebar {
             position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
             background: linear-gradient(145deg, #0a1f3d, #07162b);
             display: flex; flex-direction: column;
             transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
             z-index: 2000; border-left: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
         .nav-sidebar.active { right: 0; }
-        
-        .menu-header {
-            padding: 40px 30px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .menu-header { padding: 40px 30px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .menu-header h3 { color: #d4af37; font-family: 'Playfair Display', serif; font-style: italic; font-size: 22px; }
-
-        .menu-items { list-style: none; padding: 20px 0; flex-shrink: 0; }
-        
+        .menu-items { list-style: none; padding: 20px 0; }
         .menu-link { 
-            color: #e2e8f0; text-decoration: none; padding: 18px 30px; display: block; 
-            font-size: 15px; font-weight: 500; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s; position: relative;
+            color: #e2e8f0; text-decoration: none; padding: 18px 30px; display: flex; 
+            justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
         }
-        .menu-link:hover { background: rgba(212, 175, 55, 0.1); color: #d4af37; padding-left: 35px; }
+        .menu-link:hover { background: rgba(212, 175, 55, 0.1); color: #d4af37; }
 
-        /* Sub-Menu Dropdown */
-        .sub-menu {
-            background: rgba(0, 0, 0, 0.2);
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.5s ease;
-            list-style: none;
-        }
+        /* Sub-Menu */
+        .sub-menu { background: rgba(0, 0, 0, 0.2); max-height: 0; overflow: hidden; transition: max-height 0.5s ease; list-style: none; }
         .sub-menu.show { max-height: 400px; padding: 10px 0; }
-        .sub-menu a {
-            padding: 12px 50px;
-            color: #94a3b8 !important;
-            font-size: 14px; display: flex; align-items: center;
-            text-decoration: none; transition: 0.3s;
-        }
+        .sub-menu a { padding: 12px 50px; color: #94a3b8 !important; font-size: 14px; display: flex; align-items: center; text-decoration: none; transition: 0.3s; }
         .sub-menu a:hover { color: #fff !important; transform: translateX(5px); }
-        
-        /* Mutiara Glow */
-        .pearl-icon { 
-            display: inline-block; width: 8px; height: 8px; background: #fff; 
-            border-radius: 50%; margin-right: 12px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(212, 175, 55, 0.4); 
-        }
+        .pearl-icon { display: inline-block; width: 8px; height: 8px; background: #fff; border-radius: 50%; margin-right: 12px; box-shadow: 0 0 10px #fff; }
 
-        /* Visual Pemandangan di Menu */
         .sidebar-footer-view {
             flex-grow: 1; width: 100%; margin-top: 20px;
-            background-image: linear-gradient(to top, rgba(10, 31, 61, 1), transparent), 
-                              url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=800');
-            background-size: cover; background-position: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            background-image: linear-gradient(to top, #0a1f3d, transparent), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=800');
+            background-size: cover; background-position: center; opacity: 0.6;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- 4. HERO --- */
         .hero {
-            width: 100%; height: 50vh;
-            background-image: linear-gradient(rgba(10,31,61,0.5), rgba(10,31,61,0.85)), 
-                              url('https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; border-bottom: 6px solid #d4af37;
+            width: 100%; height: 45vh;
+            background-image: linear-gradient(rgba(10,31,61,0.5), rgba(10,31,61,0.85)), url('https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260');
+            background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; border-bottom: 6px solid #d4af37;
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 6vw, 40px); letter-spacing: 1px; }
-        .hero p { color: #d4af37; letter-spacing: 5px; margin-top: 10px; font-size: 12px; font-weight: 600; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 6vw, 36px); text-align: center; }
+        .hero p { color: #d4af37; letter-spacing: 4px; margin-top: 10px; font-size: 12px; font-weight: 600; }
 
-        /* --- BIODATA --- */
-        .main-container { display: flex; justify-content: center; margin-top: -80px; padding: 0 20px 60px; position: relative; z-index: 10; }
-        .profile-card { background: white; width: 100%; max-width: 480px; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); padding: 45px 35px; text-align: center; }
-        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 15px; outline: 2px solid #d4af37; }
+        /* --- 5. BIODATA --- */
+        .main-container { display: flex; justify-content: center; margin-top: -60px; padding: 0 20px 60px; position: relative; z-index: 10; }
+        .profile-card { background: white; width: 100%; max-width: 450px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); padding: 40px 30px; text-align: center; }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 15px; outline: 2px solid #d4af37; }
         
-        .bio-grid { display: grid; grid-template-columns: 110px 10px 1fr; gap: 15px 0; text-align: left; padding-top: 25px; border-top: 1px solid #f1f5f9; margin-top: 25px; }
-        .label { color: #94a3b8; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .value { color: #0f172a; font-size: 14px; font-weight: 600; padding-left: 15px; }
+        .bio-grid { display: grid; grid-template-columns: 100px 10px 1fr; gap: 15px 0; text-align: left; padding-top: 25px; border-top: 1px solid #f1f5f9; margin-top: 25px; }
+        .label { color: #94a3b8; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .value { color: #0f172a; font-size: 14px; font-weight: 600; padding-left: 10px; }
 
-        .overlay-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 31, 61, 0.4); backdrop-filter: blur(4px); display: none; z-index: 1500; }
+        .overlay-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none; z-index: 1500; }
         .overlay-bg.active { display: block; }
     </style>
 </head>
@@ -116,14 +83,12 @@
     </nav>
 
     <div class="nav-sidebar" id="sidebar">
-        <div class="menu-header">
-            <h3>Navigasi</h3>
-        </div>
+        <div class="menu-header"><h3>Navigasi</h3></div>
         <ul class="menu-items">
             <li>
                 <div class="menu-link" id="btn-dropdown">
                     <span>💎 Review Website</span>
-                    <span id="arrow" style="font-size: 12px; opacity: 0.6;">▼</span>
+                    <span id="arrow">▼</span>
                 </div>
                 <ul class="sub-menu" id="dropdown-list">
                     <li><a href="#"><span class="pearl-icon"></span> Review Website 1</a></li>
@@ -145,13 +110,13 @@
     <div class="main-container">
         <div class="profile-card">
             <img src="https://i.ibb.co.com/JWkFmk0q/IMG-20260203-WA0087.jpg" alt="Salman" class="profile-img">
-            <h2 style="color: #0a1f3d; font-family: 'Playfair Display', serif; font-size: 28px;">Biodata Mahasiswa</h2>
+            <h2 style="color: #0a1f3d; font-family: 'Playfair Display', serif;">Biodata Mahasiswa</h2>
 
             <div class="bio-grid">
                 <div class="label">Nama</div><div>:</div><div class="value">Salman Mutawakkil</div>
                 <div class="label">NIM</div><div>:</div><div class="value">251305022</div>
                 <div class="label">Prodi</div><div>:</div><div class="value">Ilmu Hadits</div>
-                <div class="label">Fakultas</div><div>:</div><div class="value">Ushuluddin & Adab (FUDA)</div>
+                <div class="label">Fakultas</div><div>:</div><div class="value">FUDA</div>
                 <div class="label">Kampus</div><div>:</div><div class="value">UIN SMH Banten</div>
                 <div class="label">Semester</div><div>:</div><div class="value">02 (Dua)</div>
             </div>
@@ -164,7 +129,6 @@
         const overlay = document.getElementById('overlay');
         const btnDropdown = document.getElementById('btn-dropdown');
         const dropdownList = document.getElementById('dropdown-list');
-        const arrow = document.getElementById('arrow');
 
         btnMenu.addEventListener('click', () => {
             sidebar.classList.toggle('active');
@@ -180,493 +144,6 @@
 
         btnDropdown.addEventListener('click', () => {
             dropdownList.classList.toggle('show');
-            arrow.style.transform = dropdownList.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-            arrow.style.transition = "0.3s";
-        });
-    </script>
-</body>
-</html>
-                              url('https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; border-bottom: 6px solid #d4af37;
-        }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 6vw, 40px); letter-spacing: 1px; }
-        .hero p { color: #d4af37; letter-spacing: 5px; margin-top: 10px; font-size: 12px; font-weight: 600; }
-
-        /* --- BIODATA --- */
-        .main-container { display: flex; justify-content: center; margin-top: -80px; padding: 0 20px 60px; position: relative; z-index: 10; }
-        .profile-card { background: white; width: 100%; max-width: 480px; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); padding: 45px 35px; text-align: center; }
-        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 15px; outline: 2px solid #d4af37; }
-        
-        .bio-grid { display: grid; grid-template-columns: 110px 10px 1fr; gap: 15px 0; text-align: left; padding-top: 25px; border-top: 1px solid #f1f5f9; margin-top: 25px; }
-        .label { color: #94a3b8; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .value { color: #0f172a; font-size: 14px; font-weight: 600; padding-left: 15px; }
-
-        .overlay-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 31, 61, 0.4); backdrop-filter: blur(4px); display: none; z-index: 1500; }
-        .overlay-bg.active { display: block; }
-    </style>
-</head>
-<body>
-
-    <div class="overlay-bg" id="overlay"></div>
-
-    <nav class="navbar">
-        <a href="#" class="logo">REVIEW SALMAN MUTAWAKKIL</a>
-        <div class="burger" id="btn-menu">☰</div>
-    </nav>
-
-    <div class="nav-sidebar" id="sidebar">
-        <div class="menu-header">
-            <h3>Navigasi</h3>
-        </div>
-        <ul class="menu-items">
-            <li>
-                <div class="menu-link" id="btn-dropdown">
-                    <span>💎 Review Website</span>
-                    <span id="arrow" style="font-size: 12px; opacity: 0.6;">▼</span>
-                </div>
-                <ul class="sub-menu" id="dropdown-list">
-                    <li><a href="#"><span class="pearl-icon"></span> Review Website 1</a></li>
-                    <li><a href="#"><span class="pearl-icon"></span> Review Website 2</a></li>
-                    <li><a href="#"><span class="pearl-icon"></span> Review Website 3</a></li>
-                </ul>
-            </li>
-            <li><a href="#" class="menu-link"><span>📜 Review E-Book</span></a></li>
-            <li><a href="#" class="menu-link"><span>👤 Tentang Saya</span></a></li>
-        </ul>
-        <div class="sidebar-footer-view"></div>
-    </div>
-
-    <div class="hero">
-        <h1>Review Hadits Digital</h1>
-        <p>PERSPEKTIF AKADEMIK</p>
-    </div>
-
-    <div class="main-container">
-        <div class="profile-card">
-            <img src="https://i.ibb.co.com/JWkFmk0q/IMG-20260203-WA0087.jpg" alt="Salman" class="profile-img">
-            <h2 style="color: #0a1f3d; font-family: 'Playfair Display', serif; font-size: 28px;">Biodata Mahasiswa</h2>
-
-            <div class="bio-grid">
-                <div class="label">Nama</div><div>:</div><div class="value">Salman Mutawakkil</div>
-                <div class="label">NIM</div><div>:</div><div class="value">251305022</div>
-                <div class="label">Prodi</div><div>:</div><div class="value">Ilmu Hadits</div>
-                <div class="label">Fakultas</div><div>:</div><div class="value">Ushuluddin & Adab (FUDA)</div>
-                <div class="label">Kampus</div><div>:</div><div class="value">UIN SMH Banten</div>
-                <div class="label">Semester</div><div>:</div><div class="value">02 (Dua)</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const btnMenu = document.getElementById('btn-menu');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const btnDropdown = document.getElementById('btn-dropdown');
-        const dropdownList = document.getElementById('dropdown-list');
-        const arrow = document.getElementById('arrow');
-
-        btnMenu.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            btnMenu.innerHTML = sidebar.classList.contains('active') ? '✕' : '☰';
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            btnMenu.innerHTML = '☰';
-        });
-
-        btnDropdown.addEventListener('click', () => {
-            dropdownList.classList.toggle('show');
-            arrow.style.transform = dropdownList.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-            arrow.style.transition = "0.3s";
-        });
-    </script>
-</body>
-</html>
-            padding: 40px 30px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .menu-header h3 { color: #d4af37; font-family: 'Playfair Display', serif; font-style: italic; font-size: 22px; }
-
-        .menu-items { list-style: none; padding: 20px 0; flex-shrink: 0; }
-        
-        .menu-link { 
-            color: #e2e8f0; text-decoration: none; padding: 18px 30px; display: block; 
-            font-size: 15px; font-weight: 500; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s; position: relative;
-        }
-        .menu-link:hover { background: rgba(212, 175, 55, 0.1); color: #d4af37; padding-left: 35px; }
-
-        /* Sub-Menu Dropdown */
-        .sub-menu {
-            background: rgba(0, 0, 0, 0.2);
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.5s ease;
-            list-style: none;
-        }
-        .sub-menu.show { max-height: 400px; padding: 10px 0; }
-        .sub-menu a {
-            padding: 12px 50px;
-            color: #94a3b8 !important;
-            font-size: 14px; display: flex; align-items: center;
-            text-decoration: none; transition: 0.3s;
-        }
-        .sub-menu a:hover { color: #fff !important; transform: translateX(5px); }
-        
-        /* Mutiara Glow */
-        .pearl-icon { 
-            display: inline-block; width: 8px; height: 8px; background: #fff; 
-            border-radius: 50%; margin-right: 12px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(212, 175, 55, 0.4); 
-        }
-
-        /* Visual Pemandangan di Menu */
-        .sidebar-footer-view {
-            flex-grow: 1; width: 100%; margin-top: 20px;
-            background-image: linear-gradient(to top, rgba(10, 31, 61, 1), transparent), 
-                              url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=800');
-            background-size: cover; background-position: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            width: 100%; height: 50vh;
-            background-image: linear-gradient(rgba(10,31,61,0.5), rgba(10,31,61,0.85)), 
-                              url('https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; border-bottom: 6px solid #d4af37;
-        }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 6vw, 40px); letter-spacing: 1px; }
-        .hero p { color: #d4af37; letter-spacing: 5px; margin-top: 10px; font-size: 12px; font-weight: 600; }
-
-        /* --- BIODATA --- */
-        .main-container { display: flex; justify-content: center; margin-top: -80px; padding: 0 20px 60px; position: relative; z-index: 10; }
-        .profile-card { background: white; width: 100%; max-width: 480px; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); padding: 45px 35px; text-align: center; }
-        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 15px; outline: 2px solid #d4af37; }
-        
-        .bio-grid { display: grid; grid-template-columns: 110px 10px 1fr; gap: 15px 0; text-align: left; padding-top: 25px; border-top: 1px solid #f1f5f9; margin-top: 25px; }
-        .label { color: #94a3b8; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .value { color: #0f172a; font-size: 14px; font-weight: 600; padding-left: 15px; }
-
-        .overlay-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 31, 61, 0.4); backdrop-filter: blur(4px); display: none; z-index: 1500; }
-        .overlay-bg.active { display: block; }
-    </style>
-</head>
-<body>
-
-    <div class="overlay-bg" id="overlay"></div>
-
-    <nav class="navbar">
-        <a href="#" class="logo">REVIEW SALMAN MUTAWAKKIL</a>
-        <div class="burger" id="btn-menu">☰</div>
-    </nav>
-
-    <div class="nav-sidebar" id="sidebar">
-        <div class="menu-header">
-            <h3>Navigasi</h3>
-        </div>
-        <ul class="menu-items">
-            <li>
-                <div class="menu-link" id="btn-dropdown">
-                    <span>💎 Review Website</span>
-                    <span id="arrow" style="font-size: 12px; opacity: 0.6;">▼</span>
-                </div>
-                <ul class="sub-menu" id="dropdown-list">
-                    <li><a href="#"><span class="pearl-icon"></span> Review Website 1</a></li>
-                    <li><a href="#"><span class="pearl-icon"></span> Review Website 2</a></li>
-                    <li><a href="#"><span class="pearl-icon"></span> Review Website 3</a></li>
-                </ul>
-            </li>
-            <li><a href="#" class="menu-link"><span>📜 Review E-Book</span></a></li>
-            <li><a href="#" class="menu-link"><span>👤 Tentang Saya</span></a></li>
-        </ul>
-        <div class="sidebar-footer-view"></div>
-    </div>
-
-    <div class="hero">
-        <h1>Review Hadits Digital</h1>
-        <p>PERSPEKTIF AKADEMIK</p>
-    </div>
-
-    <div class="main-container">
-        <div class="profile-card">
-            <img src="https://i.ibb.co.com/JWkFmk0q/IMG-20260203-WA0087.jpg" alt="Salman" class="profile-img">
-            <h2 style="color: #0a1f3d; font-family: 'Playfair Display', serif; font-size: 28px;">Biodata Mahasiswa</h2>
-
-            <div class="bio-grid">
-                <div class="label">Nama</div><div>:</div><div class="value">Salman Mutawakkil</div>
-                <div class="label">NIM</div><div>:</div><div class="value">251305022</div>
-                <div class="label">Prodi</div><div>:</div><div class="value">Ilmu Hadits</div>
-                <div class="label">Fakultas</div><div>:</div><div class="value">Ushuluddin & Adab (FUDA)</div>
-                <div class="label">Kampus</div><div>:</div><div class="value">UIN SMH Banten</div>
-                <div class="label">Semester</div><div>:</div><div class="value">02 (Dua)</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const btnMenu = document.getElementById('btn-menu');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const btnDropdown = document.getElementById('btn-dropdown');
-        const dropdownList = document.getElementById('dropdown-list');
-        const arrow = document.getElementById('arrow');
-
-        btnMenu.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            btnMenu.innerHTML = sidebar.classList.contains('active') ? '✕' : '☰';
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            btnMenu.innerHTML = '☰';
-        });
-
-        btnDropdown.addEventListener('click', () => {
-            dropdownList.classList.toggle('show');
-            arrow.style.transform = dropdownList.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-            arrow.style.transition = "0.3s";
-        });
-    </script>
-</body>
-</html>
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #d4af37;
-            text-decoration: none;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-links li {
-            margin-left: 20px;
-            position: relative;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .nav-links a:hover {
-            color: #ffd700;
-            background-color: rgba(212, 175, 55, 0.15);
-        }
-
-        /* Dropdown Tema Biru Gold */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #112d52;
-            min-width: 260px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border-radius: 5px;
-            flex-direction: column;
-            padding: 10px 0;
-            border: 1px solid #d4af37;
-        }
-
-        .dropdown-content a {
-            padding: 12px 20px;
-            display: block;
-            font-size: 14px;
-            border-radius: 0;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #183b6b;
-            color: #ffd700;
-            padding-left: 25px;
-        }
-
-        .show-dropdown {
-            display: flex !important;
-        }
-
-        .burger {
-            display: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: #d4af37;
-            transition: 0.3s;
-        }
-
-        /* --- 3. HEADER & LAYOUT --- */
-        header {
-            background: linear-gradient(rgba(10, 31, 61, 0.88), rgba(10, 31, 61, 0.88)), 
-                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 35vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 0 20px;
-            border-bottom: 4px solid #d4af37;
-        }
-
-        header h1 { font-size: 32px; margin-bottom: 10px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        header p { font-size: 18px; color: #d4af37; }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        /* --- 4. PROFILE CARD STYLING --- */
-        .profile-section {
-            display: flex;
-            justify-content: center;
-            margin-top: -60px;
-            margin-bottom: 40px;
-        }
-
-        .profile-card {
-            background: white;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(10, 31, 61, 0.1);
-            padding: 35px;
-            text-align: center;
-            border-top: 6px solid #d4af37;
-        }
-
-        .profile-img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #d4af37;
-            margin-bottom: 15px;
-            padding: 3px;
-        }
-
-        .profile-card h2 { color: #0a1f3d; font-size: 24px; }
-        .profile-card .subtitle { color: #888; font-weight: 600; font-size: 13px; text-transform: uppercase; margin-bottom: 15px; display: block; }
-
-        .bio-box { text-align: left; margin-top: 20px; }
-        .bio-title { font-weight: bold; color: #0a1f3d; margin-bottom: 5px; font-size: 15px; border-left: 4px solid #d4af37; padding-left: 10px; }
-        .bio-text { font-size: 14px; color: #555; margin-bottom: 15px; }
-
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-        .skill-tag { background: #eaf0f7; color: #0a1f3d; padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: 600; border: 1px solid #d4af37; }
-
-        /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .navbar .logo { font-size: 16px; } 
-            .burger { display: block; }
-            .nav-links {
-                position: absolute; top: 60px; right: 0; width: 100%;
-                background: #0a1f3d; flex-direction: column;
-                transform: translateY(-150%); opacity: 0; transition: 0.4s ease;
-                padding: 20px 0; border-bottom: 3px solid #d4af37;
-            }
-            .nav-links.active { transform: translateY(0); opacity: 1; }
-            .nav-links li { margin: 5px 0; width: 100%; text-align: center; }
-            .dropdown-content { position: static; background: #112d52; width: 100%; border: none; box-shadow: none; }
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <a href="index.html" class="logo">Salman Mutawakkil</a>
-        <div class="burger" id="burger-menu">&#9776;</div>
-        <ul class="nav-links" id="nav-menu">
-            <li>
-                <a href="#" id="drop-trigger">Review Website &#9662;</a>
-                <ul class="dropdown-content" id="drop-menu">
-                    <li><a href="web1.html">Review Website 1 (Hadits.id)</a></li>
-                    <li><a href="web2.html">Review Website 2 (Marja' Muhammad Basuki)</a></li>
-                    <li><a href="web3.html">Review Website 3 (Hadits Tazkia)</a></li>
-                </ul>
-            </li>
-            <li><a href="ebook.html">Review E-Book</a></li>
-            <li><a href="index.html">Kontak / Profil</a></li>
-        </ul>
-    </nav>
-
-    <header>
-        <h1>Sistem Informasi Digital Hadits</h1>
-        <p>Analisis Kritis untuk Pembelajaran Hadits di Era Modern</p>
-    </header>
-
-    <div class="container">
-        <section class="profile-section">
-            <div class="profile-card">
-                <img src="https://i.ibb.co.com/JWkFmk0q/IMG-20260203-WA0087.jpg" alt="Salman Mutawakkil" class="profile-img">
-                <h2>Salman Mutawakkil</h2>
-                <span class="subtitle">NIM: 251305022</span>
-                <div class="bio-box">
-                    <div class="bio-title">Biodata Akademik</div>
-                    <ul class="bio-text" style="list-style-type: none; padding-left: 0;">
-                        <li><strong>1. Prodi:</strong> Ilmu Hadits</li>
-                        <li><strong>2. Fakultas:</strong> FUDA</li>
-                        <li><strong>3. Universitas:</strong> UIN Maulana Hasanuddin</li>
-                        <li><strong>4. Semester:</strong> 2</li>
-                    </ul>
-                    <div class="bio-title">Keahlian Utama</div>
-                    <div class="skills-grid">
-                        <span class="skill-tag">Studi Hadits Digital</span>
-                        <span class="skill-tag">Analisis Website</span>
-                        <span class="skill-tag">Linguistik Arab</span>
-                        <span class="skill-tag">Review Platform</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        const burger = document.getElementById('burger-menu');
-        const navMenu = document.getElementById('nav-menu');
-        const dropTrigger = document.getElementById('drop-trigger');
-        const dropMenu = document.getElementById('drop-menu');
-
-        // Toggle Burger Menu
-        burger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            burger.innerHTML = navMenu.classList.contains('active') ? '&#10005;' : '&#9776;';
-        });
-
-        // Toggle Dropdown
-        dropTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropMenu.classList.toggle('show-dropdown');
-        });
-
-        // Close dropdown when clicking outside
-        window.addEventListener('click', (e) => {
-            if (!dropTrigger.contains(e.target) && !dropMenu.contains(e.target)) {
-                dropMenu.classList.remove('show-dropdown');
-            }
         });
     </script>
 </body>
